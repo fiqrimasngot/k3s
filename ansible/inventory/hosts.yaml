@@ -1,0 +1,16 @@
+---
+kubernetes:
+  children:
+    master:
+      hosts:
+        k3svm-1:
+          ansible_user: debian
+          ansible_host: 10.32.1.41
+    worker:
+      hosts:
+        k3svm-2:
+          ansible_user: debian
+          ansible_host: 10.32.1.42
+        k3svm-3:
+          ansible_user: debian
+          ansible_host: 10.32.1.43
