@@ -31,8 +31,7 @@ spec:
         value: "${TIMEZONE}"
       persistence:
         enabled: true
-        # existingClaim: mariadb-pvc-v2 
-        storageClassName: nfs-kube
+        existingClaim: mariadb-nfs 
       readinessProbe:
         initialDelaySeconds: 35
         periodSeconds: 5
@@ -75,3 +74,37 @@ spec:
 
         CREATE USER IF NOT EXISTS 'ghost'@'%' IDENTIFIED BY '${GHOST_DB_PASSWORD}';
         GRANT ALL PRIVILEGES ON ghost.* to 'ghost'@'%';
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-nfs
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: "truenas"
+    path: /mnt/lab-pool/k3s-nfs/config-pvc/mariadb
+  mountOptions:
+    - nfsvers=4.1
+    - nconnect=8
+    - hard
+    - noatime
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-nfs
+  namespace: storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs-kube
+  resources:
+    requests:
+      storage: 2Gi
