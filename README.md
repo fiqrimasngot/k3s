@@ -83,6 +83,14 @@ If you are new to Flux and GitOps in general it is important to understand that 
     exit
     newgrp sudo
     sudo apt update
+
+    echo "${USER} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${USER}
+
+    github_username=
+    mkdir -m 700 ~/.ssh
+    sudo apt install -y curl
+    curl https://github.com/${github_username}.keys > ~/.ssh/authorized_keys
+    chmod 600 ~/.ssh/authorized_keys
     ```
 
 4. [Post install] Add SSH keys (or use `ssh-copy-id` on the client that is connecting)
