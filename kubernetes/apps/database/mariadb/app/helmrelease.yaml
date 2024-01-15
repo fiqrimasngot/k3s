@@ -88,7 +88,7 @@ spec:
   storageClassName: nfs-kube
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: "truenas"
+    server: "10.32.1.5"
     path: /mnt/lab-pool/k3s-nfs/config-pvc
   mountOptions:
     - nfsvers=4.1
