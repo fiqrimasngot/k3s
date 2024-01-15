@@ -94,12 +94,13 @@ metadata:
   name: ghost-v1
   namespace: media
 spec:
+  storageClassName: openebs-hostpath
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: nfs-kube      
+     
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -107,9 +108,9 @@ metadata:
   name: ghost-db-pvc-v1
   namespace: media
 spec:
+  storageClassName: openebs-hostpath
   accessModes:
-    - ReadWriteMany
-  storageClassName: nfs-kube
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi  
+      storage: 2G
