@@ -16,6 +16,7 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
+  - ./longhorn.yaml
   - ./k8s-at-home-charts.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
