@@ -85,7 +85,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: nfs-kube
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "truenas"
