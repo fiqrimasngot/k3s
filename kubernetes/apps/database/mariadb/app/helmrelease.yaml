@@ -89,7 +89,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "truenas"
-    path: /mnt/lab-pool/k3s-nfs/config-pvc/mariadb
+    path: /mnt/lab-pool/k3s-nfs/config-pvc
   mountOptions:
     - nfsvers=4.1
     - nconnect=8
