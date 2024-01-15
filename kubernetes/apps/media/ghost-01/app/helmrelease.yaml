@@ -80,7 +80,7 @@ spec:
       interval: 15m
   values:
     auth:
-      # database__connection__host: ghost-mariadb
+      database__connection__host: ghost-mariadb-01
       rootPassword: ${MEDIA_GHOST_DB_ROOT_PASSWORD}
       username: ${SECRET_GHOST_MARIADB_USER}
       password: ${SECRET_GHOST_MARIADB_PASS}
