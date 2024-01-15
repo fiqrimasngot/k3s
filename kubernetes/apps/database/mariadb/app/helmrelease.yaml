@@ -32,6 +32,7 @@ spec:
       persistence:
         enabled: true
         existingClaim: mariadb-nfs 
+        storageClassName: nfs-kube
       readinessProbe:
         initialDelaySeconds: 35
         periodSeconds: 5
