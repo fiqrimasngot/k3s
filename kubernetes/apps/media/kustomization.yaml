@@ -5,4 +5,4 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Website
-  - ./ghost-01/ks.yaml
+  # - ./ghost-01/ks.yaml
