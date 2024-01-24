@@ -81,7 +81,7 @@ spec:
   values:
     auth:
       # database__connection__host: ghost-mariadb-02
-      rootPassword: ${MEDIA_GHOST_DB_ROOT_PASSWORD}
+      rootPassword: ${SECRET_GHOST_MARIADB_PASS}
       username: ${SECRET_GHOST_MARIADB_USER}
       password: ${SECRET_GHOST_MARIADB_PASS}
       database: ${SECRET_GHOST_MARIADB_DB}
