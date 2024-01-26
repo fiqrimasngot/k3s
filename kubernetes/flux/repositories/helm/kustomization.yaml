@@ -5,6 +5,7 @@ resources:
   - ./backube.yaml
   - ./bitnami.yaml
   - ./bitnami-charts.yaml
+  - ./bjw-s-charts.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./coredns.yaml
