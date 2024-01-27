@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghost
-      tag: 5.76@sha256:020d87c83555cd213cc514f5accddbad50f1905710f8096c7a592bb75e0f944e
+      tag: 5.76@sha256:c18d718e6ec98d358a7b5dba684841a430689e3202ae614359ee47334fb06f59
     env:
       TZ: "${TIMEZONE}"
       url: "https://uitm.${SECRET_DOMAIN}"
