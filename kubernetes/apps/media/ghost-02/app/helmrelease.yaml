@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghost
-      tag: 5.81@sha256:8e938e5eaf5df525ce0a34be77648aa37ac5238f66708698faa4e2b57f38750b
+      tag: 5.81@sha256:1ffc8ffc2670fee55d09684f9ee5792c1544ec9d27808b32bc920b923adea8db
     env:
       TZ: "${TIMEZONE}"
       url: "https://dash.${SECRET_DOMAIN}"
