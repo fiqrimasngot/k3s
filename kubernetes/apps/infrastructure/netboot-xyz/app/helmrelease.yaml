@@ -1,0 +1,141 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: netboot-xyz
+  namespace: infrastructure
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  interval: 5m0s
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: lscr.io/linuxserver/netbootxyz
+              tag: 2.0.53
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "${TIMEZONE}"
+              PUID: 1000
+              PGID: 1000
+              PORT_RANGE: 30000:30010
+            # resources:
+            #   requests:
+            #     cpu: 475m
+            #     memory: 978M
+            #   limits:
+            #     cpu: 796m
+            #     memory: 1243M
+        strategy: Recreate
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3000
+      pxe:
+        controller: main
+        type: LoadBalancer
+        loadBalancerIP: ${SVC_NETBOOTXYZ_ADDR}
+        externalTrafficPolicy: Local
+        ports:
+          tftp:
+            enabled: true
+            port: 69
+            protocol: UDP
+          # assets:
+          #   enabled: true
+          #   port: 80
+          tftp0:
+            enabled: true
+            port: 30000
+          tftp1:
+            enabled: true
+            port: 30001
+          tftp2:
+            enabled: true
+            port: 30002
+          tftp3:
+            enabled: true
+            port: 30003
+          tftp4:
+            enabled: true
+            port: 30004
+          tftp5:
+            enabled: true
+            port: 30005
+          tftp6:
+            enabled: true
+            port: 30006
+          tftp7:
+            enabled: true
+            port: 30007
+          tftp8:
+            enabled: true
+            port: 30008
+          tftp9:
+            enabled: true
+            port: 30009
+          tftp10:
+            enabled: true
+            port: 30010
+    ingress:
+      main:
+        enabled: true
+        className: "internal"
+        annotations:
+          # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          hajimari.io/enable: "true"
+          hajimari.io/group: "admin"
+          hajimari.io/icon: "network-pos"
+        hosts:
+          - host: &host "netboot-xyz.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        existingClaim: netbootxyz-config-v1
+        globalMounts:
+          - path: /config
+      # assets:
+      #   enabled: true
+      #   type: persistentVolumeClaim
+      #   existingClaim: netbootxyz-assets-v1
+      #   globalMounts:
+      #     - path: /assets
+    defaultPodOptions:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: netbootxyz-config-v1
+  namespace: infrastructure
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+  storageClassName: longhorn
+  volumeMode: Filesystem
