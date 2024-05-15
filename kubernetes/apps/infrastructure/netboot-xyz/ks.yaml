@@ -5,7 +5,7 @@ metadata:
   name: &app netboot-xyz
   namespace: flux-system
 spec:
-  targetNamespace: media
+  targetNamespace: infrastructure
   dependsOn: 
     - name: longhorn
   commonMetadata:
