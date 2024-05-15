@@ -5,4 +5,4 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Website
-  # - ./netboot-xyz/ks.yaml
+  - ./netboot-xyz/ks.yaml
